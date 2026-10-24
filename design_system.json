@@ -1,8 +1,8 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "./design_system.schema.json",
   "name": "ASR Collection Design System",
   "version": "1.0.0",
-  "description": "Design tokens and reusable storefront UI patterns for ASR Collection. Specification only; does not define application behavior.",
+  "description": "ASR Collection storefront design system: design tokens, component contracts, responsive UI patterns, accessibility requirements, and implementation conventions.",
   "tokens": {
     "color": {
       "brand": {
@@ -118,12 +118,22 @@
       "showWishlist": true,
       "titleMaxLines": 2,
       "priceFontWeight": 700,
-      "hoverEffectDesktop": "subtle-lift"
+      "hoverEffectDesktop": "subtle-lift",
+      "layout": "image-first",
+      "imageAspectRatio": "4:5",
+      "imageFit": "cover",
+      "showQuickAdd": true,
+      "showStockStatus": true,
+      "loadingImage": "lazy",
+      "focusVisible": true
     },
     "promoBanner": {
       "radius": "16px",
       "aspectRatio": "16:5",
-      "mobileAspectRatio": "2:1"
+      "mobileAspectRatio": "2:1",
+      "imageAltRequired": true,
+      "overlayContrastRequired": true,
+      "ctaRequired": false
     },
     "button": {
       "heightSm": "36px",
@@ -132,7 +142,23 @@
       "radius": "10px",
       "primaryBackground": "{tokens.color.brand.primary}",
       "primaryText": "{tokens.color.text.inverse}",
-      "minimumTouchTarget": "44px"
+      "minimumTouchTarget": "44px",
+      "variants": [
+        "primary",
+        "secondary",
+        "outline",
+        "ghost",
+        "destructive"
+      ],
+      "sizes": [
+        "sm",
+        "md",
+        "lg",
+        "icon"
+      ],
+      "disabledState": true,
+      "loadingState": true,
+      "focusVisible": true
     },
     "bottomNavigation": {
       "enabled": true,
@@ -161,25 +187,74 @@
           "icon": "user-round"
         }
       ],
-      "safeAreaInset": true
+      "safeAreaInset": true,
+      "activeStateRequired": true,
+      "ariaLabelRequired": true,
+      "hideOnDesktop": true
     },
     "cartSummary": {
       "stickyOnMobile": true,
       "showItemCount": true,
       "showSubtotal": true,
-      "primaryActionLabel": "Lanjut ke Checkout"
+      "primaryActionLabel": "Lanjut ke Checkout",
+      "showShippingEstimate": true,
+      "emptyStateRequired": true,
+      "quantityControls": true,
+      "subtotalExcludesShippingUntilCalculated": true
     },
     "checkout": {
       "layoutMobile": "single-column",
       "showOrderSummary": true,
       "showShippingCostStatus": true,
       "shippingCostPendingLabel": "Menunggu konfirmasi ongkir",
-      "paymentActionLabel": "Lanjut ke Pembayaran"
+      "paymentActionLabel": "Lanjut ke Pembayaran",
+      "states": [
+        "idle",
+        "validating",
+        "submitting",
+        "success",
+        "error"
+      ],
+      "requireExplicitPaymentProviderIntegration": true,
+      "neverMarkPaidFromClientOnly": true
     },
     "feedback": {
       "toastPositionMobile": "top-center",
       "emptyStateIllustration": "optional",
-      "skeletonLoading": true
+      "skeletonLoading": true,
+      "toastLibrary": "sonner",
+      "errorStateRequired": true,
+      "successAndErrorMustIncludeText": true
+    },
+    "productDetail": {
+      "imageGallery": true,
+      "variantSelection": true,
+      "quantitySelector": true,
+      "stockStatus": true,
+      "shippingInformation": true,
+      "relatedProducts": true,
+      "stickyAddToCartMobile": true
+    },
+    "search": {
+      "autocompleteOptional": true,
+      "clearAction": true,
+      "emptyState": true,
+      "keyboardAccessible": true
+    },
+    "form": {
+      "labelRequired": true,
+      "inlineValidation": true,
+      "fieldErrorTextRequired": true,
+      "autocompleteAttributesRequired": true
+    },
+    "dialog": {
+      "focusTrap": true,
+      "escapeToClose": true,
+      "restoreFocus": true
+    },
+    "skeleton": {
+      "ariaBusy": true,
+      "reducedMotionCompatible": true
     }
   },
   "patterns": {
@@ -187,15 +262,21 @@
       "SearchHeader",
       "PromoCarousel",
       "CategoryShortcuts",
-      "FlashSaleOrFeaturedCollection",
+      "FeaturedCollection",
       "NewArrivals",
-      "RecommendedProducts"
+      "RecommendedProducts",
+      "TrustBenefits",
+      "NewsletterOrFooter"
     ],
     "productDetail": [
+      "Breadcrumbs",
       "ImageGallery",
       "ProductTitle",
       "PriceAndDiscount",
+      "RatingAndReviewCount",
       "Availability",
+      "VariantSelection",
+      "QuantitySelector",
       "Description",
       "ShippingInformation",
       "RelatedProducts",
@@ -206,8 +287,33 @@
       "visibleFocusRing": true,
       "respectReducedMotion": true,
       "doNotUseColorAsOnlyStatusSignal": true,
-      "imageAltTextRequired": true
-    }
+      "imageAltTextRequired": true,
+      "semanticLandmarksRequired": true,
+      "keyboardNavigationRequired": true,
+      "formLabelsRequired": true,
+      "dialogFocusManagementRequired": true,
+      "announceCartUpdates": true,
+      "contrastTarget": "WCAG 2.2 AA",
+      "reducedMotionMediaQuery": "prefers-reduced-motion"
+    },
+    "cart": [
+      "CartItems",
+      "QuantityControls",
+      "RemoveItem",
+      "OrderSummary",
+      "ShippingEstimate",
+      "EmptyCartState",
+      "CheckoutCallToAction"
+    ],
+    "checkout": [
+      "ContactInformation",
+      "ShippingAddress",
+      "DeliveryMethod",
+      "OrderSummary",
+      "PaymentMethodIntegrationBoundary",
+      "ValidationAndErrorStates",
+      "OrderConfirmation"
+    ]
   },
   "tailwindMapping": {
     "primary": "brand.primary",
@@ -217,14 +323,71 @@
     "card": "surface.default",
     "border": "border.default",
     "destructive": "feedback.danger",
-    "ring": "border.focus"
+    "ring": "border.focus",
+    "brand": "color.brand.primary",
+    "brandHover": "color.brand.primaryHover",
+    "accent": "color.brand.secondary",
+    "page": "color.surface.page",
+    "surface": "color.surface.default",
+    "mutedSurface": "color.surface.subtle",
+    "text": "color.text.primary",
+    "mutedText": "color.text.secondary",
+    "subtleText": "color.text.muted",
+    "success": "color.feedback.success",
+    "warning": "color.feedback.warning",
+    "danger": "color.feedback.danger",
+    "promoBackground": "color.promo.background",
+    "promoText": "color.promo.text",
+    "radiusSm": "radius.sm",
+    "radiusMd": "radius.md",
+    "radiusLg": "radius.lg",
+    "radiusXl": "radius.xl",
+    "shadowSm": "shadow.sm",
+    "shadowMd": "shadow.md",
+    "shadowLg": "shadow.lg"
   },
   "implementationNotes": [
     "Warna hijau adalah aksen utama yang terinspirasi secara umum oleh marketplace Indonesia; oranye-merah menjadi aksen promosi sekunder.",
     "Jangan menggunakan logo, ikon bermerek, copy, atau aset proprietary Tokopedia/Shopee.",
     "Pastikan warna dan token diuji terhadap kontras WCAG sebelum produksi.",
     "Mapping token ke konfigurasi Tailwind perlu disesuaikan dengan versi Tailwind proyek.",
-    "File ini hanya definisi design tokens dan spesifikasi pola UI; tidak mengubah source code atau dependensi.",
-    "Nilai token dalam format {tokens...} adalah referensi desain; implementasi harus menyelesaikannya sebelum digunakan di CSS."
-  ]
+    "Nilai token dalam format {tokens...} adalah referensi desain; implementasi harus menyelesaikannya sebelum digunakan di CSS.",
+    "This file is the design-system configuration; its validation contract lives in ./design_system.schema.json.",
+    "Token references use dot notation and must be resolved by the token-to-CSS build step; raw reference strings must never be emitted as CSS values.",
+    "The storefront uses React + TypeScript + Vite + Tailwind CSS v4 and accessible local UI components compatible with shadcn/ui conventions.",
+    "Use mock product data only until a real catalog API is connected. Cart state is client-side demo state and is not persisted server-side.",
+    "Checkout is a UI demonstration only. Do not initiate or simulate successful payment without an approved payment-provider integration and verified server-side status."
+  ],
+  "libraries": {
+    "runtime": [
+      "react",
+      "react-dom",
+      "react-router-dom"
+    ],
+    "styling": [
+      "tailwindcss@4",
+      "@tailwindcss/vite"
+    ],
+    "uiPrimitives": [
+      "@radix-ui/react-slot"
+    ],
+    "components": [
+      "class-variance-authority",
+      "clsx",
+      "tailwind-merge"
+    ],
+    "icons": [
+      "lucide-react"
+    ],
+    "state": [
+      "zustand"
+    ],
+    "feedback": [
+      "sonner"
+    ],
+    "carousel": [
+      "embla-carousel-react"
+    ],
+    "policy": "Use shadcn/ui-compatible local components built on Radix UI. Add components selectively; do not introduce a large UI framework that conflicts with the design tokens."
+  }
 }
