@@ -1,0 +1,12 @@
+export type Product = { id:string; name:string; category:string; price:number; originalPrice?:number; rating:number; image:string; badge?:string; description:string };
+export const categories = ["Semua","Fashion","Tas","Aksesori","Lifestyle"];
+export const products: Product[] = [
+{id:"p1",name:"Everyday Canvas Tote",category:"Tas",price:189000,originalPrice:249000,rating:4.9,badge:"Best seller",image:"https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=85",description:"Tas kanvas serbaguna dengan siluet minimalis untuk menemani aktivitas sehari-hari."},
+{id:"p2",name:"Classic Linen Shirt",category:"Fashion",price:279000,rating:4.8,badge:"New",image:"https://images.unsplash.com/photo-1598033129183-c4f50c736f10?auto=format&fit=crop&w=800&q=85",description:"Kemeja berpotongan santai yang mudah dipadukan untuk tampilan kasual maupun rapi."},
+{id:"p3",name:"Minimal Daily Sneakers",category:"Fashion",price:429000,originalPrice:499000,rating:4.9,image:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=85",description:"Sneakers harian dengan desain bersih untuk gaya yang praktis."},
+{id:"p4",name:"Soft Form Shoulder Bag",category:"Tas",price:329000,rating:4.7,image:"https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=85",description:"Shoulder bag berstruktur lembut dengan ruang untuk kebutuhan esensial."},
+{id:"p5",name:"Everyday Water Bottle",category:"Lifestyle",price:99000,originalPrice:129000,rating:4.8,image:"https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=800&q=85",description:"Botol minum untuk membantu menjaga rutinitas hidrasi."},
+{id:"p6",name:"Sculpted Gold Earrings",category:"Aksesori",price:159000,rating:4.9,image:"https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=800&q=85",description:"Aksesori berdesain sederhana sebagai sentuhan akhir penampilan."},
+{id:"p7",name:"Relaxed Weekend Pants",category:"Fashion",price:319000,originalPrice:359000,rating:4.6,image:"https://images.unsplash.com/photo-1473966968600-fa801b869a1a?auto=format&fit=crop&w=800&q=85",description:"Celana relaxed-fit untuk kenyamanan sepanjang hari."},
+{id:"p8",name:"Structured Mini Wallet",category:"Aksesori",price:119000,rating:4.8,image:"https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=800&q=85",description:"Dompet ringkas untuk menyimpan kartu dan uang dengan rapi."}
+];
