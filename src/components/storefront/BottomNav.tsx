@@ -1,0 +1,5 @@
+import { Grid2X2, House, ShoppingBag, UserRound } from "lucide-react";
+import { NavLink } from "react-router-dom";
+import { useCart } from "@/store/cart";
+const items=[{to:"/",label:"Beranda",Icon:House},{to:"/categories",label:"Kategori",Icon:Grid2X2},{to:"/cart",label:"Keranjang",Icon:ShoppingBag},{to:"/account",label:"Akun",Icon:UserRound}];
+export function BottomNav(){const count=useCart(state=>state.count());return <nav aria-label="Navigasi utama" className="safe-bottom fixed inset-x-0 bottom-0 z-40 border-t border-line bg-white/95 px-2 pt-2 shadow-sm backdrop-blur md:hidden"><div className="mx-auto flex max-w-lg items-center justify-around">{items.map(({to,label,Icon})=><NavLink key={to} to={to} className={({isActive})=>"flex min-h-12 min-w-[64px] flex-col items-center justify-center gap-1 rounded-xl px-3 text-[10px] "+(isActive?"text-brand":"text-muted")}><span className="relative"><Icon size={20}/>{to==="/cart"&&count>0&&<span className="absolute -right-2 -top-1 grid size-4 place-items-center rounded-full bg-orange-600 text-[9px] text-white">{count}</span>}</span>{label}</NavLink>)}</div></nav>}
