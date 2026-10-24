@@ -1,0 +1,230 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "name": "ASR Collection Design System",
+  "version": "1.0.0",
+  "description": "Design tokens and reusable storefront UI patterns for ASR Collection. Specification only; does not define application behavior.",
+  "tokens": {
+    "color": {
+      "brand": {
+        "primary": "#16803D",
+        "primaryHover": "#126B33",
+        "primaryActive": "#0F572A",
+        "secondary": "#F15A24",
+        "secondaryHover": "#D94B1B"
+      },
+      "surface": {
+        "page": "#F7F8FA",
+        "default": "#FFFFFF",
+        "subtle": "#F1F5F2",
+        "raised": "#FFFFFF",
+        "inverse": "#142018"
+      },
+      "text": {
+        "primary": "#17211A",
+        "secondary": "#59665D",
+        "muted": "#778279",
+        "inverse": "#FFFFFF",
+        "link": "#16803D"
+      },
+      "border": {
+        "default": "#E1E7E2",
+        "strong": "#C6D0C8",
+        "focus": "#16803D"
+      },
+      "feedback": {
+        "success": "#16803D",
+        "warning": "#B45309",
+        "danger": "#C62828",
+        "info": "#2563EB"
+      },
+      "promo": {
+        "background": "#FFF1EB",
+        "text": "#B93815",
+        "badge": "#E94F22"
+      }
+    },
+    "typography": {
+      "fontFamily": {
+        "sans": "Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+      },
+      "fontSize": {
+        "xs": "12px",
+        "sm": "14px",
+        "md": "16px",
+        "lg": "18px",
+        "xl": "20px",
+        "2xl": "24px",
+        "3xl": "30px"
+      },
+      "lineHeight": {
+        "tight": 1.2,
+        "normal": 1.5,
+        "relaxed": 1.65
+      },
+      "fontWeight": {
+        "regular": 400,
+        "medium": 500,
+        "semibold": 600,
+        "bold": 700
+      }
+    },
+    "spacing": {
+      "0": "0px",
+      "1": "4px",
+      "2": "8px",
+      "3": "12px",
+      "4": "16px",
+      "5": "20px",
+      "6": "24px",
+      "8": "32px",
+      "10": "40px",
+      "12": "48px",
+      "16": "64px"
+    },
+    "radius": {
+      "sm": "6px",
+      "md": "10px",
+      "lg": "16px",
+      "xl": "20px",
+      "full": "9999px"
+    },
+    "shadow": {
+      "sm": "0 1px 2px rgba(16, 24, 16, 0.06)",
+      "md": "0 4px 12px rgba(16, 24, 16, 0.08)",
+      "lg": "0 12px 32px rgba(16, 24, 16, 0.12)"
+    },
+    "motion": {
+      "durationFast": "120ms",
+      "durationNormal": "200ms",
+      "durationSlow": "300ms",
+      "easingStandard": "cubic-bezier(0.2, 0, 0, 1)"
+    },
+    "layout": {
+      "contentMaxWidth": "1200px",
+      "pageGutterMobile": "16px",
+      "pageGutterDesktop": "24px",
+      "sectionGapMobile": "24px",
+      "sectionGapDesktop": "32px"
+    }
+  },
+  "components": {
+    "productCard": {
+      "showBrand": false,
+      "showPrice": true,
+      "showSalePrice": true,
+      "showDiscountBadge": true,
+      "showRating": true,
+      "showSoldCount": false,
+      "showWishlist": true,
+      "titleMaxLines": 2,
+      "priceFontWeight": 700,
+      "hoverEffectDesktop": "subtle-lift"
+    },
+    "promoBanner": {
+      "radius": "16px",
+      "aspectRatio": "16:5",
+      "mobileAspectRatio": "2:1"
+    },
+    "button": {
+      "heightSm": "36px",
+      "heightMd": "44px",
+      "heightLg": "48px",
+      "radius": "10px",
+      "primaryBackground": "{tokens.color.brand.primary}",
+      "primaryText": "{tokens.color.text.inverse}",
+      "minimumTouchTarget": "44px"
+    },
+    "bottomNavigation": {
+      "enabled": true,
+      "mobileOnly": true,
+      "height": "64px",
+      "items": [
+        {
+          "id": "home",
+          "label": "Beranda",
+          "icon": "house"
+        },
+        {
+          "id": "categories",
+          "label": "Kategori",
+          "icon": "grid-2x2"
+        },
+        {
+          "id": "cart",
+          "label": "Keranjang",
+          "icon": "shopping-cart",
+          "showBadge": true
+        },
+        {
+          "id": "account",
+          "label": "Akun",
+          "icon": "user-round"
+        }
+      ],
+      "safeAreaInset": true
+    },
+    "cartSummary": {
+      "stickyOnMobile": true,
+      "showItemCount": true,
+      "showSubtotal": true,
+      "primaryActionLabel": "Lanjut ke Checkout"
+    },
+    "checkout": {
+      "layoutMobile": "single-column",
+      "showOrderSummary": true,
+      "showShippingCostStatus": true,
+      "shippingCostPendingLabel": "Menunggu konfirmasi ongkir",
+      "paymentActionLabel": "Lanjut ke Pembayaran"
+    },
+    "feedback": {
+      "toastPositionMobile": "top-center",
+      "emptyStateIllustration": "optional",
+      "skeletonLoading": true
+    }
+  },
+  "patterns": {
+    "homeSections": [
+      "SearchHeader",
+      "PromoCarousel",
+      "CategoryShortcuts",
+      "FlashSaleOrFeaturedCollection",
+      "NewArrivals",
+      "RecommendedProducts"
+    ],
+    "productDetail": [
+      "ImageGallery",
+      "ProductTitle",
+      "PriceAndDiscount",
+      "Availability",
+      "Description",
+      "ShippingInformation",
+      "RelatedProducts",
+      "StickyAddToCart"
+    ],
+    "accessibility": {
+      "minimumTouchTarget": "44px",
+      "visibleFocusRing": true,
+      "respectReducedMotion": true,
+      "doNotUseColorAsOnlyStatusSignal": true,
+      "imageAltTextRequired": true
+    }
+  },
+  "tailwindMapping": {
+    "primary": "brand.primary",
+    "secondary": "brand.secondary",
+    "background": "surface.page",
+    "foreground": "text.primary",
+    "card": "surface.default",
+    "border": "border.default",
+    "destructive": "feedback.danger",
+    "ring": "border.focus"
+  },
+  "implementationNotes": [
+    "Warna hijau adalah aksen utama yang terinspirasi secara umum oleh marketplace Indonesia; oranye-merah menjadi aksen promosi sekunder.",
+    "Jangan menggunakan logo, ikon bermerek, copy, atau aset proprietary Tokopedia/Shopee.",
+    "Pastikan warna dan token diuji terhadap kontras WCAG sebelum produksi.",
+    "Mapping token ke konfigurasi Tailwind perlu disesuaikan dengan versi Tailwind proyek.",
+    "File ini hanya definisi design tokens dan spesifikasi pola UI; tidak mengubah source code atau dependensi.",
+    "Nilai token dalam format {tokens...} adalah referensi desain; implementasi harus menyelesaikannya sebelum digunakan di CSS."
+  ]
+}
