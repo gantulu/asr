@@ -1,0 +1,277 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "name": "Asri Collection",
+  "shortName": "Asri Collection",
+  "description": "Storefront e-commerce fashion mobile-first dengan katalog produk, pencarian, keranjang, checkout, dan pembayaran.",
+  "version": "1.0.0",
+  "locale": "id-ID",
+  "currency": "IDR",
+  "platform": "web",
+  "appType": "ecommerce-storefront",
+  "framework": {
+    "library": "React",
+    "bundler": "Vite",
+    "language": "TypeScript",
+    "styling": "Tailwind CSS",
+    "componentLibrary": "shadcn/ui",
+    "icons": "lucide-react",
+    "routing": "React Router",
+    "stateManagement": "Zustand"
+  },
+  "design": {
+    "designSystemFile": "./design_system.json",
+    "responsiveStrategy": "mobile-first",
+    "mobileOnlyExperience": true,
+    "maxContentWidth": "1280px",
+    "themeMode": "light",
+    "defaultFont": "Inter",
+    "borderRadius": "lg"
+  },
+  "brand": {
+    "displayName": "Asri Collection",
+    "logoPath": "/assets/brand/logo.svg",
+    "faviconPath": "/favicon.ico",
+    "primaryColorToken": "tokens.color.brand.primary",
+    "secondaryColorToken": "tokens.color.brand.secondary"
+  },
+  "routes": [
+    {
+      "path": "/",
+      "name": "Beranda",
+      "page": "HomePage",
+      "layout": "MainLayout",
+      "navigation": true
+    },
+    {
+      "path": "/kategori",
+      "name": "Kategori",
+      "page": "CategoriesPage",
+      "layout": "MainLayout",
+      "navigation": true
+    },
+    {
+      "path": "/kategori/:slug",
+      "name": "Produk Kategori",
+      "page": "CategoryProductsPage",
+      "layout": "MainLayout",
+      "navigation": false
+    },
+    {
+      "path": "/cari",
+      "name": "Hasil Pencarian",
+      "page": "SearchPage",
+      "layout": "MainLayout",
+      "navigation": false
+    },
+    {
+      "path": "/produk/:id",
+      "name": "Detail Produk",
+      "page": "ProductDetailPage",
+      "layout": "MainLayout",
+      "navigation": false
+    },
+    {
+      "path": "/keranjang",
+      "name": "Keranjang",
+      "page": "CartPage",
+      "layout": "MainLayout",
+      "navigation": true,
+      "badge": "cartItemCount"
+    },
+    {
+      "path": "/checkout",
+      "name": "Checkout",
+      "page": "CheckoutPage",
+      "layout": "StandaloneLayout",
+      "navigation": false
+    },
+    {
+      "path": "/pembayaran/:orderId",
+      "name": "PaymentPage",
+      "page": "PaymentPage",
+      "layout": "StandaloneLayout",
+      "navigation": false
+    },
+    {
+      "path": "/pesanan",
+      "name": "OrderHistoryPage",
+      "page": "OrderHistoryPage",
+      "layout": "MainLayout",
+      "navigation": false,
+      "requiresAccount": true
+    },
+    {
+      "path": "/pesanan/:orderId",
+      "name": "OrderDetailPage",
+      "page": "OrderDetailPage",
+      "layout": "MainLayout",
+      "navigation": false
+    },
+    {
+      "path": "/akun",
+      "name": "AccountPage",
+      "page": "AccountPage",
+      "layout": "MainLayout",
+      "navigation": true
+    },
+    {
+      "path": "/masuk",
+      "name": "LoginPage",
+      "page": "LoginPage",
+      "layout": "StandaloneLayout",
+      "navigation": false
+    },
+    {
+      "path": "/daftar",
+      "name": "RegisterPage",
+      "page": "RegisterPage",
+      "layout": "StandaloneLayout",
+      "navigation": false
+    }
+  ],
+  "navigation": {
+    "header": {
+      "enabled": true,
+      "sticky": true,
+      "searchRoute": "/cari",
+      "showBrand": true,
+      "showCartShortcut": true
+    },
+    "bottomNavigation": {
+      "enabled": true,
+      "mobileOnly": true,
+      "items": [
+        {
+          "label": "Beranda",
+          "path": "/",
+          "icon": "house"
+        },
+        {
+          "label": "Kategori",
+          "path": "/kategori",
+          "icon": "grid-2x2"
+        },
+        {
+          "label": "Keranjang",
+          "path": "/keranjang",
+          "icon": "shopping-cart",
+          "badge": "cartItemCount"
+        },
+        {
+          "label": "Akun",
+          "path": "/akun",
+          "icon": "user-round"
+        }
+      ]
+    }
+  },
+  "features": {
+    "catalog": {
+      "enabled": true,
+      "search": true,
+      "categoryFilter": true,
+      "sortOptions": [
+        "relevance",
+        "newest",
+        "price_asc",
+        "price_desc"
+      ],
+      "productVariants": false,
+      "showAvailability": true,
+      "showSalePrice": true,
+      "showDiscountBadge": true,
+      "paginationMode": "load-more"
+    },
+    "cart": {
+      "enabled": true,
+      "persistence": "localStorage",
+      "stateStore": "Zustand",
+      "allowGuest": true,
+      "quantityMustNotExceedStock": true
+    },
+    "checkout": {
+      "enabled": true,
+      "guestCheckout": true,
+      "optionalAccount": true,
+      "shippingCostMode": "admin-confirmed",
+      "shippingApprovalRequired": true,
+      "paymentStartsAfterShippingApproval": true,
+      "paymentProvider": "Duitku POP",
+      "currency": "IDR"
+    },
+    "account": {
+      "enabled": true,
+      "optional": true,
+      "authenticationMethods": [
+        "email",
+        "password"
+      ],
+      "orderHistoryRequiresAccount": true
+    },
+    "orderTracking": {
+      "enabled": true,
+      "trackingNumberEnteredByAdmin": true
+    }
+  },
+  "integrations": {
+    "backend": {
+      "provider": "Supabase",
+      "configurationSource": "environment",
+      "publicUrlVariable": "VITE_SUPABASE_URL",
+      "publicAnonKeyVariable": "VITE_SUPABASE_ANON_KEY",
+      "doNotStoreSecretsInAppJson": true
+    },
+    "payments": {
+      "provider": "Duitku POP",
+      "mode": "sandbox-by-default",
+      "createInvoiceFunction": "duitku-create-invoice",
+      "callbackFunction": "duitku-callback",
+      "paymentStatusFunction": "get-payment-status",
+      "credentialsLocation": "Supabase Edge Function secrets",
+      "secretNames": [
+        "DUITKU_MERCHANT_CODE",
+        "DUITKU_API_KEY"
+      ],
+      "frontendPaymentStatusIsAuthoritative": false
+    }
+  },
+  "data": {
+    "productsSource": "Supabase",
+    "productTable": "products",
+    "productImagesBucket": "ws",
+    "productImageFolder": "products/",
+    "currencyStorage": "numeric-IDR",
+    "neverSeedDemoProductsAutomatically": true
+  },
+  "security": {
+    "guestCheckout": true,
+    "neverExposePaymentCredentials": true,
+    "verifyPaymentStatusServerSide": true,
+    "validatePricesAndStockServerSide": true,
+    "doNotTrustClientOrderTotals": true,
+    "doNotStoreSecretsInClientConfig": true
+  },
+  "environmentVariables": {
+    "required": [
+      "VITE_SUPABASE_URL",
+      "VITE_SUPABASE_ANON_KEY"
+    ],
+    "optional": [
+      "VITE_APP_NAME",
+      "VITE_APP_URL"
+    ],
+    "serverOnly": [
+      "DUITKU_MERCHANT_CODE",
+      "DUITKU_API_KEY"
+    ]
+  },
+  "implementationConstraints": {
+    "preserveExistingProjectArchitecture": true,
+    "auditBeforeDependencyChanges": true,
+    "doNotModifyDatabaseFromThisConfig": true,
+    "doNotDeployFromThisConfig": true,
+    "doNotMergeWithoutApproval": true,
+    "businessRule": "Shipping cost must be confirmed by admin and approved by customer before invoice/payment initiation.",
+    "note": "This file is an application specification/configuration draft. Route and function names must be reconciled against the active repository before implementation."
+  }
+}
