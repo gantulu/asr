@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/gantulu/asr/blob/main/design_system.schema.json",
+  "title": "ASR Collection Design System Configuration",
+  "description": "Validation schema for design_system.json (configuration document, not a JSON Schema itself).",
+  "type": "object",
+  "required": [
+    "$schema",
+    "name",
+    "version",
+    "description",
+    "tokens",
+    "components",
+    "patterns",
+    "tailwindMapping",
+    "implementationNotes",
+    "libraries"
+  ],
+  "properties": {
+    "$schema": {
+      "const": "./design_system.schema.json"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "tokens": {
+      "type": "object",
+      "required": [
+        "color",
+        "typography",
+        "spacing",
+        "radius",
+        "shadow",
+        "motion",
+        "layout"
+      ],
+      "properties": {
+        "color": {
+          "type": "object",
+          "required": [
+            "brand",
+            "surface",
+            "text",
+            "border",
+            "feedback",
+            "promo"
+          ]
+        },
+        "typography": {
+          "type": "object",
+          "required": [
+            "fontFamily",
+            "fontSize",
+            "lineHeight",
+            "fontWeight"
+          ]
+        },
+        "spacing": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "pattern": "^(0|\\d+(\\.\\d+)?(px|rem|em|%))$"
+          }
+        },
+        "radius": {
+          "type": "object"
+        },
+        "shadow": {
+          "type": "object"
+        },
+        "motion": {
+          "type": "object"
+        },
+        "layout": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": true
+    },
+    "components": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "patterns": {
+      "type": "object",
+      "required": [
+        "homeSections",
+        "productDetail",
+        "accessibility"
+      ],
+      "properties": {
+        "homeSections": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "productDetail": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "accessibility": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": true
+    },
+    "tailwindMapping": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "implementationNotes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "libraries": {
+      "type": "object",
+      "required": [
+        "runtime",
+        "styling",
+        "uiPrimitives",
+        "components",
+        "icons",
+        "state",
+        "feedback",
+        "carousel",
+        "policy"
+      ],
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}
